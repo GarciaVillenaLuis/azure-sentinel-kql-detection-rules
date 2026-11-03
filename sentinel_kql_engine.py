@@ -203,6 +203,28 @@ class SentinelKqlEngine:
         return catalog
 
 
+    def validate_all_rules(self) -> Dict[str, Any]:
+        """Validates all .kql rule files in the rules directory."""
+        if not os.path.exists(self.rules_dir):
+            return {"total_rules": 0, "valid_count": 0, "all_valid": True, "results": {}}
+        results = {}
+        all_valid = True
+        for f in os.listdir(self.rules_dir):
+            if f.endswith(".kql"):
+                p = os.path.join(self.rules_dir, f)
+                with open(p, "r", encoding="utf-8") as qf:
+                    res = self.validate_kql_syntax(qf.read())
+                    results[f] = res
+                    if not res["valid"]:
+                        all_valid = False
+        return {
+            "total_rules": len(results),
+            "valid_count": sum(1 for r in results.values() if r["valid"]),
+            "all_valid": all_valid,
+            "results": results
+        }
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Microsoft Sentinel KQL Threat Detection & Cloud Hunting Engine CLI"
@@ -210,7 +232,9 @@ def main():
     parser.add_argument("--list-rules", action="store_true",
                         help="List all production detection rules with MITRE ATT&CK Cloud mappings")
     parser.add_argument("--validate", "-v", help="Path to .kql file to syntax check and lint")
-    parser.add_argument("--simulate", "-s", help="Rule ID to simulate (e.g. SEC-AZ-001, SEC-AZ-002, SEC-AWS-001)")
+    parser.add_argument("--validate-all", action="store_true",
+                        help="Lint and validate all .kql rules in the rules directory")
+    parser.add_argument("--simulate", "-s", help="Rule ID to simulate (e.g. SEC-AZ-001, SEC-AZ-002, SEC-AWS-001, SEC-AZ-003)")
     parser.add_argument("--logs", "-l", help="Path to simulated cloud logs JSON file")
     parser.add_argument("--stats", action="store_true",
                         help="Show detection engineering telemetry and hunting statistics")
@@ -245,6 +269,22 @@ def main():
             for r in rules:
                 print(f"{r['rule_id']:<12} | {r['severity']:<10} | {r['table']:<16} | {r['name']:<46}")
             print("-" * 92)
+        return
+
+    if args.validate_all:
+        all_res = engine.validate_all_rules()
+        if args.format == "json":
+            print(json.dumps(all_res, indent=2))
+        else:
+            print("-" * 75)
+            print(f"KQL RULEPACK VALIDATION SUMMARY: {all_res['valid_count']}/{all_res['total_rules']} RULES VALID")
+            print("-" * 75)
+            for fname, r in all_res["results"].items():
+                st = "PASS" if r["valid"] else "FAIL"
+                print(f"[{st}] {fname} ({r['line_count']} lines, {r['pipe_count']} pipes)")
+            print("-" * 75)
+        if not all_res["all_valid"]:
+            sys.exit(2)
         return
 
     if args.validate:
