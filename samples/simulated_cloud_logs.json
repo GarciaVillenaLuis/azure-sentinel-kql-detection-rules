@@ -1,0 +1,61 @@
+[
+  {
+    "table": "SigninLogs",
+    "TimeGenerated": "2026-11-03T01:10:00Z",
+    "UserPrincipalName": "attacker.target@enterprise.com",
+    "ResultType": "50126",
+    "IPAddress": "198.51.100.44",
+    "Location": "RO"
+  },
+  {
+    "table": "SigninLogs",
+    "TimeGenerated": "2026-11-03T01:10:30Z",
+    "UserPrincipalName": "attacker.target@enterprise.com",
+    "ResultType": "50126",
+    "IPAddress": "198.51.100.44",
+    "Location": "RO"
+  },
+  {
+    "table": "SigninLogs",
+    "TimeGenerated": "2026-11-03T01:11:00Z",
+    "UserPrincipalName": "attacker.target@enterprise.com",
+    "ResultType": "50126",
+    "IPAddress": "198.51.100.44",
+    "Location": "RO"
+  },
+  {
+    "table": "SigninLogs",
+    "TimeGenerated": "2026-11-03T01:11:30Z",
+    "UserPrincipalName": "attacker.target@enterprise.com",
+    "ResultType": "50126",
+    "IPAddress": "198.51.100.44",
+    "Location": "RO"
+  },
+  {
+    "table": "SigninLogs",
+    "TimeGenerated": "2026-11-03T01:12:00Z",
+    "UserPrincipalName": "attacker.target@enterprise.com",
+    "ResultType": "50126",
+    "IPAddress": "198.51.100.44",
+    "Location": "RO"
+  },
+  {
+    "table": "AzureActivity",
+    "TimeGenerated": "2026-11-03T01:15:00Z",
+    "OperationNameValue": "microsoft.authorization/roleassignments/write",
+    "RoleDefinition": "Owner (Subscription Scope)",
+    "Caller": "compromised.serviceprincipal@enterprise.onmicrosoft.com",
+    "TargetPrincipal": "rogue-external-user@shadowit.net"
+  },
+  {
+    "table": "AWSCloudTrail",
+    "TimeGenerated": "2026-11-03T01:20:00Z",
+    "eventName": "StopLogging",
+    "userIdentity": {
+      "arn": "arn:aws:iam::123456789012:user/adversary-access-key"
+    },
+    "requestParameters": {
+      "name": "arn:aws:cloudtrail:eu-west-1:123456789012:trail/enterprise-audit-trail"
+    }
+  }
+]
