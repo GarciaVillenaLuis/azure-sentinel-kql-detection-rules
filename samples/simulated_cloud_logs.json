@@ -57,5 +57,104 @@
     "requestParameters": {
       "name": "arn:aws:cloudtrail:eu-west-1:123456789012:trail/enterprise-audit-trail"
     }
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:00Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "db-connection-string"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:05Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "jwt-signing-secret"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:10Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "storage-access-key-1"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:15Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "stripe-webhook-secret"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:20Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "internal-api-token"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:25Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "oauth-client-secret"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:30Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "tls-private-cert"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:35Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "ssh-bastion-key"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:40Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "backup-kms-key"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:45Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "redis-auth-pass"
+  },
+  {
+    "table": "AzureDiagnostics",
+    "TimeGenerated": "2026-11-03T01:25:50Z",
+    "OperationName": "SecretGet",
+    "ResourceProvider": "MICROSOFT.KEYVAULT",
+    "caller_ip_or_identity": "adversary.insider@enterprise.com",
+    "Resource": "kv-prod-eu-west",
+    "id_s": "vault-root-token"
   }
 ]
