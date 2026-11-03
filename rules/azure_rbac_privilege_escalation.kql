@@ -1,0 +1,17 @@
+// Title: Suspicious Azure RBAC Role Assignment (Privilege Escalation)
+// Rule ID: SEC-AZ-002
+// Severity: Critical
+// Tactics: Persistence, Privilege Escalation
+// Techniques: T1098, T1078.004
+// Query Frequency: 15m, Lookback: 30m
+
+let timeWindow = 30m;
+AzureActivity
+| where TimeGenerated >= ago(timeWindow)
+| where OperationNameValue =~ "microsoft.authorization/roleassignments/write"
+| where ActivityStatusValue =~ "Success"
+| extend RoleDefinition = tostring(parse_json(Properties).requestbody.Properties.RoleDefinitionId)
+| extend TargetPrincipal = tostring(parse_json(Properties).requestbody.Properties.PrincipalId)
+| extend Scope = tostring(parse_json(Properties).requestbody.Properties.Scope)
+| where RoleDefinition contains "Owner" or RoleDefinition contains "User Access Administrator" or RoleDefinition contains "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+| project TimeGenerated, Caller, CallerIpAddress, TargetPrincipal, RoleDefinition, Scope, SubscriptionId
