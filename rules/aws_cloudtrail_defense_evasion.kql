@@ -1,0 +1,15 @@
+// Title: AWS CloudTrail Defense Evasion (StopLogging / DeleteTrail)
+// Rule ID: SEC-AWS-001
+// Severity: Critical
+// Tactics: Defense Evasion
+// Techniques: T1562.001
+// Query Frequency: 5m, Lookback: 10m
+
+let lookback = 10m;
+AWSCloudTrail
+| where TimeGenerated >= ago(lookback)
+| where eventName in ("StopLogging", "DeleteTrail", "UpdateTrail", "PutEventSelectors")
+| extend PrincipalArn = tostring(parse_json(UserIdentity).arn)
+| extend TrailName = tostring(parse_json(RequestParameters).name)
+| extend SourceIP = tostring(SourceIpAddress)
+| project TimeGenerated, eventName, PrincipalArn, TrailName, SourceIP, AwsRegion, RecipientAccountId
