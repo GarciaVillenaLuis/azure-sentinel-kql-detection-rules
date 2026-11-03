@@ -73,6 +73,22 @@ class TestSentinelKqlEngine(unittest.TestCase):
         self.assertEqual(res["alerts_generated"], 1)
         self.assertEqual(res["alerts"][0]["action"], "StopLogging")
 
+    def test_simulate_keyvault_secret_exfiltration(self):
+        logs = [
+            {"table": "AzureDiagnostics", "OperationName": "SecretGet", "caller_ip_or_identity": "bad_actor"}
+            for _ in range(12)
+        ]
+        res = self.engine.simulate_detection("SEC-AZ-003", logs)
+        self.assertEqual(res["alerts_generated"], 1)
+        self.assertEqual(res["alerts"][0]["entity"], "bad_actor")
+        self.assertEqual(res["alerts"][0]["download_count"], 12)
+
+    def test_validate_all_rules(self):
+        summary = self.engine.validate_all_rules()
+        self.assertGreaterEqual(summary["total_rules"], 4)
+        self.assertTrue(summary["all_valid"])
+        self.assertEqual(summary["valid_count"], summary["total_rules"])
+
 
 if __name__ == "__main__":
     unittest.main()
