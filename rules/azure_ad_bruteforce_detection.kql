@@ -1,0 +1,22 @@
+// Title: Azure AD Password Spray and Brute Force Detection
+// Rule ID: SEC-AZ-001
+// Severity: High
+// Tactics: Initial Access, Credential Access
+// Techniques: T1110.003, T1078
+// Query Frequency: 5m, Lookback: 10m
+
+let timeRange = 10m;
+let failureThreshold = 5;
+SigninLogs
+| where TimeGenerated >= ago(timeRange)
+| where ResultType in ("50126", "50053", "50055", "50057") // Invalid credentials / locked accounts
+| summarize 
+    FailedLoginsCount = count(),
+    TargetIPs = make_set(IPAddress),
+    UserAgents = make_set(UserAgent),
+    TargetLocations = make_set(Location)
+    by UserPrincipalName, bin(TimeGenerated, 5m)
+| where FailedLoginsCount >= failureThreshold
+| extend AccountName = tostring(split(UserPrincipalName, "@")[0])
+| extend AccountUPN = UserPrincipalName
+| project TimeGenerated, AccountUPN, FailedLoginsCount, TargetIPs, UserAgents, TargetLocations
