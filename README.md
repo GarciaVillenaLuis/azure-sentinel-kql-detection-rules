@@ -1,6 +1,7 @@
 # Microsoft Sentinel KQL Threat Detection & Cloud Hunting Rulepack 🛡️🔍
 
 [![CI/CD Pipeline](https://github.com/GarciaVillenaLuis/azure-sentinel-kql-detection-rules/actions/workflows/ci.yml/badge.svg)](https://github.com/GarciaVillenaLuis/azure-sentinel-kql-detection-rules/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/GarciaVillenaLuis/azure-sentinel-kql-detection-rules/actions/workflows/codeql.yml/badge.svg)](https://github.com/GarciaVillenaLuis/azure-sentinel-kql-detection-rules/actions/workflows/codeql.yml)
 [![SIEM Platform](https://img.shields.io/badge/SIEM-Microsoft%20Sentinel-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/services/microsoft-sentinel/)
 [![MITRE ATT&CK](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK%20Cloud-red?style=flat-square&logo=target&logoColor=white)](https://attack.mitre.org/matrices/enterprise/cloud/)
 [![Query Language](https://img.shields.io/badge/Language-KQL%20(Kusto)-008272?style=flat-square)](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
