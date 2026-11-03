@@ -17,6 +17,9 @@ jobs:
           python sentinel_kql_engine.py --validate rules/azure_ad_bruteforce_detection.kql
           python sentinel_kql_engine.py --validate rules/azure_rbac_privilege_escalation.kql
           python sentinel_kql_engine.py --validate rules/aws_cloudtrail_defense_evasion.kql
+          python sentinel_kql_engine.py --validate rules/azure_keyvault_secret_exfiltration.kql
+          python sentinel_kql_engine.py --validate-all
           python sentinel_kql_engine.py --simulate SEC-AZ-001
           python sentinel_kql_engine.py --simulate SEC-AZ-002
           python sentinel_kql_engine.py --simulate SEC-AWS-001
+          python sentinel_kql_engine.py --simulate SEC-AZ-003
