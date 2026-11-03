@@ -1,0 +1,22 @@
+name: CI & Sentinel KQL Rulepack Pipeline
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Unit Tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+      - name: Validate Production KQL Rules
+        run: |
+          python sentinel_kql_engine.py --list-rules
+          python sentinel_kql_engine.py --validate rules/azure_ad_bruteforce_detection.kql
+          python sentinel_kql_engine.py --validate rules/azure_rbac_privilege_escalation.kql
+          python sentinel_kql_engine.py --validate rules/aws_cloudtrail_defense_evasion.kql
+          python sentinel_kql_engine.py --simulate SEC-AZ-001
+          python sentinel_kql_engine.py --simulate SEC-AZ-002
+          python sentinel_kql_engine.py --simulate SEC-AWS-001
