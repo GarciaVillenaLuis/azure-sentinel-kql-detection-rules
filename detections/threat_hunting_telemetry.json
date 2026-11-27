@@ -1,5 +1,5 @@
 {
-  "last_sync_utc": "2026-11-25T10:14:26Z",
+  "last_sync_utc": "2026-11-27T07:30:23.162Z",
   "rulepack_version": "2.1.0",
   "siem_platform": "Microsoft Sentinel / Azure Monitor Logs",
   "framework_alignment": "MITRE ATT&CK for Cloud (Enterprise v14.1)",
@@ -16,7 +16,5 @@
     "high_severity_rules": 2,
     "average_detection_latency": "3.9 minutes"
   },
-  "status": "OPERATIONAL",
-  "telemetry_seq": 1,
-  "mosaic_seq": 14
+  "status": "OPERATIONAL"
 }
